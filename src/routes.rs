@@ -79,7 +79,7 @@ pub(crate) async fn update_doc(req: Request<State>) -> tide::Result<impl Into<Re
     // Query the documents in the collection with a filter and an option.
     let filter = doc! { "author": "George Orwell" };
 
-    let other = doc! { "author": "[censored]" };
+    let other = doc! { "$set": { "title": "[censored]" } };
     coll.find_one_and_update(filter, other, None).await?;
     Ok("update successful!")
 }
