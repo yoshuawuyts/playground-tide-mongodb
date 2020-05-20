@@ -7,7 +7,8 @@ use state::State;
 async fn main() -> tide::Result<()> {
     femme::start(log::LevelFilter::Debug)?;
 
-    let state = State::new().await?;
+    let db_uri = "mongodb://localhost:27017/";
+    let state = State::new(db_uri).await?;
     let mut app = tide::with_state(state);
 
     app.at("/list").get(routes::list_dbs);

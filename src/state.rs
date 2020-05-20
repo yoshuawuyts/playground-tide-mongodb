@@ -7,8 +7,8 @@ pub(crate) struct State {
 
 impl State {
     /// Create a new instance of `State`.
-    pub(crate) async fn new() -> tide::Result<Self> {
-        let mongo = mongodb::Client::with_uri_str("mongodb://localhost:27017/").await?;
+    pub(crate) async fn new(uri: &str) -> tide::Result<Self> {
+        let mongo = mongodb::Client::with_uri_str(uri).await?;
         Ok(Self { db: mongo })
     }
 
